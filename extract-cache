@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
+echo "Caching apt..."
 tar -cf 'cache-apt.tar' -C '/' 'var/cache/apt'
+
+if [ -d '/var/tmp/curl' ]; then
+	echo "Caching curl..."
+	tar -cf 'cache-curl.tar' -C '/' 'var/tmp/curl'
+else
+	echo "Skipped caching curl..."
+fi

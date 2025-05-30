@@ -8,3 +8,15 @@ if [ -f 'cache-apt.tar' ]; then
 else
 	echo 'Not found: cache-apt.tar'
 fi
+
+if [ -f 'cache-curl.tar' ]; then
+	echo 'Found: cache-curl.tar'
+	tar -xf 'cache-curl.tar' -C '/'
+	chmod 777 '/var/tmp/curl'
+else
+	echo 'Not found: cache-curl.tar'
+	mkdir '/var/tmp/curl'
+	chmod 777 '/var/tmp/curl'
+fi
+
+cp 'cache-curl' '/usr/local/bin'

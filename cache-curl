@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+sha256() { echo "${1}" | sha256sum | cut -d ' ' -f 1; }
+
+random() { head -c $((10*"${1}")) '/dev/urandom' | tr -dc 'A-Za-z0-9' | head -c "${1}" && echo; }
+
+cd '/var/tmp/curl'
+
+link="${1}"
+file=$(sha256 "${link}")
+
+if [ ! -f "${file}" ]; then
+	echo "Downloading ${link}..." >&2
+	tmp="${file}.$(random 8)"
+	curl -Lo "${tmp}" "${link}"
+	mv "${tmp}" "${file}"
+else
+	echo "Cached ${link}..." >&2
+fi
+
+cat "${file}"
