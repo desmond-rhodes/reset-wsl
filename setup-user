@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+sed -i '/PS1.*\\\$/s/\\\$/\\n\0/' '/etc/skel/.bashrc'
+'/usr/lib/wsl/oobe.sh'
+
+username=$(ls /home)
+
+cat <<-EOF > '/etc/wsl.conf'
+	[boot]
+	systemd = true
+
+	[automount]
+	options = "metadata"
+
+	[user]
+	default = ${username}
+EOF
