@@ -15,7 +15,7 @@ if exist "%image%" (
 echo The image %image% does not exists.
 echo:
 
-wsl --install %distro% --no-launch
+wsl --install %distro% --no-launch || goto :eof
 echo:
-wsl --export %distro% "%image%" > nul
-wsl --unregister %distro% > nul
+wsl --export %distro% "%image%" > nul || goto :eof
+wsl --unregister %distro% > nul || goto :eof

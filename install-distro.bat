@@ -12,7 +12,7 @@ echo:
 wsl --unregister %distro% > nul 2>&1
 
 mkdir "%location%" > nul 2>&1
-wsl --import %distro% "%location%\%distro%" "%image%" > nul
+wsl --import %distro% "%location%\%distro%" "%image%" || goto :eof
 
-wsl -d %distro% -u root "./setup-user"
+wsl -d %distro% -u root "./setup-user" || goto :eof
 wsl -t %distro% > nul 2>&1
