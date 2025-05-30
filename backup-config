@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+cd_home() { cd "${HOME}"; }
+
+diff_u() { diff -u "${1}" "${2}" > "${3}" || printf ''; }
+
+new_passphrase() {
+	read -sp 'New passphrase: ' 'passphrase_1'
+	echo
+	read -sp 'Retype new passphrase: ' 'passphrase_2'
+	echo
+	if [ "${passphrase_1}" = "${passphrase_2}" ]; then
+		passphrase="${passphrase_1}"
+		unset 'passphrase_1'
+		unset 'passphrase_2'
+	else
+		echo 'Sorry, passphrase do not match.'
+		new_passphrase
+	fi
+}
+
+(cd_home && diff_u '/etc/skel/.bashrc' '.bashrc' '.bashrc.patch')
+
+echo 'Create passphrase for config backup.'
+new_passphrase
+
+(cd_home && find '.bashrc.patch' '.config/git' '.gnupg' '.ssh' -type f 2> /dev/null || printf '') \
+| grep -v -e 'random_seed' -e '\.#lk0x' -e '~$' -e 'known_hosts' \
+| tar -cC "${HOME}" -T - \
+| gpg -ac --batch --passphrase-fd 3 3<<< "${passphrase}" \
+> 'config.tar'
+
+unset 'passphrase'
+
+rm -f "${HOME}/.bashrc.patch"

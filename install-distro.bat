@@ -23,5 +23,9 @@ wsl -d %distro% -u root "./setup-user" || goto :eof
 wsl -t %distro% > nul 2>&1
 echo:
 
+wsl -d %distro% "./setup-config" || goto :eof
+wsl -t %distro% > nul 2>&1
+echo:
+
 wsl -d %distro% -u root "./setup-update" || goto :eof
 wsl -t %distro% > nul 2>&1

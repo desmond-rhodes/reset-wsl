@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+extract_config() {
+	read -sp 'Passphrase: ' 'passphrase'
+	echo
+	cat 'config.tar' \
+	| gpg -d --batch --passphrase-fd 3 3<<< "${passphrase}" 2> /dev/null \
+	| tar -xC "${HOME}" 2> /dev/null \
+	|| (echo 'Incorrect passphrase.' && extract_config)
+	unset 'passphrase'
+}
+
+if [ -f 'config.tar' ]; then
+	echo 'Found: config.tar'
+	echo 'Enter passphrase to unlock config backup.'
+	extract_config
+	patch "${HOME}/.bashrc" "${HOME}/.bashrc.patch"
+	rm -f "${HOME}/.bashrc.patch"
+else
+	echo 'Not found: config.tar'
+fi

@@ -2,6 +2,12 @@
 
 set -euo pipefail
 
+echo 'Installing gnupg...'
+apt-get -y install gnupg > /dev/null
+echo 'Installing patch...'
+apt-get -y install patch > /dev/null
+echo
+
 sed -i '/PS1.*\\\$/s/\\\$/\\n\0/' '/etc/skel/.bashrc'
 '/usr/lib/wsl/oobe.sh'
 
@@ -16,4 +22,11 @@ cat <<-EOF > '/etc/wsl.conf'
 
 	[user]
 	default = ${username}
+EOF
+
+cat <<-'EOF' > '/etc/profile.d/gnupg.sh'
+	gpg_tty() { tty > /dev/null && export GPG_TTY=$(tty); }
+	gpg() { gpg_tty; command gpg "$@"; }
+
+	gpg_tty
 EOF
