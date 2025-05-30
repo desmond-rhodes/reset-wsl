@@ -12,12 +12,12 @@ link="${1}"
 file=$(sha256 "${link}")
 
 if [ ! -f "${file}" ]; then
-	echo "Downloading ${link}..." >&2
+	echo "Downloading ${link}" >&2
 	tmp="${file}.$(random 8)"
 	curl -Lo "${tmp}" "${link}"
 	mv "${tmp}" "${file}"
 else
-	echo "Cached ${link}..." >&2
+	echo "Cached ${link}" >&2
 fi
 
 cat "${file}"

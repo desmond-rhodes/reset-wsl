@@ -2,8 +2,10 @@
 
 set -euo pipefail
 
-echo 'Installing curl...'
-apt-get -y install curl > /dev/null
+apt_get() { set -x && apt-get "${@}" > /dev/null && { set +x; } 2> /dev/null; }
+
+apt_get -y install curl
+echo
 
 echo "Installing neovim..."
 'cache-curl' 'https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz' | tar -xzC '/opt'
