@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -f 'cache-apt.tar' ]; then
+	echo 'Found: cache-apt.tar'
+	tar -xf 'cache-apt.tar' -C '/'
+else
+	echo 'Not found: cache-apt.tar'
+fi

@@ -13,6 +13,15 @@ wsl --unregister %distro% > nul 2>&1
 
 mkdir "%location%" > nul 2>&1
 wsl --import %distro% "%location%\%distro%" "%image%" || goto :eof
+echo:
+
+wsl -d %distro% -u root "./setup-cache-root" || goto :eof
+wsl -t %distro% > nul 2>&1
+echo:
 
 wsl -d %distro% -u root "./setup-user" || goto :eof
+wsl -t %distro% > nul 2>&1
+echo:
+
+wsl -d %distro% -u root "./setup-update" || goto :eof
 wsl -t %distro% > nul 2>&1
