@@ -12,7 +12,19 @@ bash -l <<-'EOF'
 EOF
 echo
 
+echo "Installing elan..."
+'cache-curl' 'https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh' | sh -s -- -y
+echo
+
 echo "Installing python..."
 bash -l <<-'EOF'
 	micromamba env create -y -n 'python' python > /dev/null
+EOF
+echo
+
+echo "Installing lean..."
+bash -l <<-'EOF'
+	lean_install() { (set -x; elan toolchain install "${1}" > /dev/null; { set +x; } 2> /dev/null) || printf ''; }
+
+	lean_install `curl -s 'https://api.github.com/repos/leanprover/lean4/tags' | sed '/name/!d;/rc/d;s/.*\(v[^"]*\).*/\1/;q'`
 EOF

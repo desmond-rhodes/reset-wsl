@@ -18,3 +18,18 @@ su "${username}" <<-'EOF'
 	mkdir -p "${HOME}/micromamba"
 	ln -s '/var/tmp/micromamba' "${HOME}/micromamba/pkgs"
 EOF
+
+if [ -f 'cache-elan.tar' ]; then
+	echo 'Found: cache-elan.tar'
+	tar -xf 'cache-elan.tar' -C '/'
+	chmod 777 '/var/tmp/elan'
+else
+	echo 'Not found: cache-elan.tar'
+	mkdir '/var/tmp/elan'
+	chmod 777 '/var/tmp/elan'
+fi
+
+su "${username}" <<-'EOF'
+	mkdir -p "${HOME}/.elan"
+	ln -s '/var/tmp/elan' "${HOME}/.elan/toolchains"
+EOF

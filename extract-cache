@@ -18,3 +18,10 @@ if [ -d '/var/tmp/micromamba' ]; then
 else
 	echo "Skipped caching micromamba..."
 fi
+
+if [ -d '/var/tmp/elan' ]; then
+	echo "Caching elan..."
+	tar -cf 'cache-elan.tar' -C '/' 'var/tmp/elan'
+else
+	echo "Skipped caching elan..."
+fi
