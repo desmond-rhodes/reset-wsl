@@ -27,9 +27,17 @@ wsl -d %distro% "./setup-config" || goto :eof
 wsl -t %distro% > nul 2>&1
 echo:
 
+wsl -d %distro% -u root "./setup-cache-nonroot" || goto :eof
+wsl -t %distro% > nul 2>&1
+echo:
+
 wsl -d %distro% -u root "./setup-update" || goto :eof
 wsl -t %distro% > nul 2>&1
 echo:
 
 wsl -d %distro% -u root "./setup-root" || goto :eof
+wsl -t %distro% > nul 2>&1
+echo:
+
+wsl -d %distro% "./setup-nonroot" || goto :eof
 wsl -t %distro% > nul 2>&1

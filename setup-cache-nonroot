@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(ls /home)
+
+if [ -f 'cache-micromamba.tar' ]; then
+	echo 'Found: cache-micromamba.tar'
+	tar -xf 'cache-micromamba.tar' -C '/'
+	chmod 777 '/var/tmp/micromamba'
+else
+	echo 'Not found: cache-micromamba.tar'
+	mkdir '/var/tmp/micromamba'
+	chmod 777 '/var/tmp/micromamba'
+fi
+
+su "${username}" <<-'EOF'
+	mkdir -p "${HOME}/micromamba"
+	ln -s '/var/tmp/micromamba' "${HOME}/micromamba/pkgs"
+EOF

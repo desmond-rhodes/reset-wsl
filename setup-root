@@ -4,6 +4,7 @@ set -euo pipefail
 
 apt_get() { set -x && apt-get "${@}" > /dev/null && { set +x; } 2> /dev/null; }
 
+apt_get -y install bzip2
 apt_get -y install curl
 echo
 

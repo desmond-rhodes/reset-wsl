@@ -11,3 +11,10 @@ if [ -d '/var/tmp/curl' ]; then
 else
 	echo "Skipped caching curl..."
 fi
+
+if [ -d '/var/tmp/micromamba' ]; then
+	echo "Caching micromamba..."
+	tar -cf 'cache-micromamba.tar' -C '/' 'var/tmp/micromamba'
+else
+	echo "Skipped caching micromamba..."
+fi
