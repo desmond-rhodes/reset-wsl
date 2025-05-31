@@ -48,3 +48,18 @@ su "${username}" <<-'EOF'
 	mkdir -p "${HOME}/.nvm"
 	ln -s '/var/tmp/nvm' "${HOME}/.nvm/.cache"
 EOF
+
+if [ -f 'cache-npm.tar' ]; then
+	echo 'Found: cache-npm.tar'
+	tar -xf 'cache-npm.tar' -C '/'
+	chmod 777 '/var/tmp/npm'
+else
+	echo 'Not found: cache-npm.tar'
+	mkdir '/var/tmp/npm'
+	chmod 777 '/var/tmp/npm'
+fi
+
+su "${username}" <<-'EOF'
+	mkdir -p "${HOME}/.npm"
+	ln -s '/var/tmp/npm' "${HOME}/.npm/_cacache"
+EOF

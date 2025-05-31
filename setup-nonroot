@@ -32,3 +32,8 @@ bash -l <<-'EOF'
 
 	lean_install `curl -s 'https://api.github.com/repos/leanprover/lean4/tags' | sed '/name/!d;/rc/d;s/.*\(v[^"]*\).*/\1/;q'`
 EOF
+echo
+
+echo "Installing typescript..."
+bash -ic "npm install --global 'typescript'" > /dev/null 2>&1
+bash -ic "npm install --prefix '/home' --save-dev '@types/node'" > /dev/null 2>&1

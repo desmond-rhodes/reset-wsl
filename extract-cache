@@ -32,3 +32,10 @@ if [ -d '/var/tmp/nvm' ]; then
 else
 	echo "Skipped caching nvm..."
 fi
+
+if [ -d '/var/tmp/npm' ]; then
+	echo "Caching npm..."
+	tar -cf 'cache-npm.tar' -C '/' 'var/tmp/npm'
+else
+	echo "Skipped caching npm..."
+fi

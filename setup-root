@@ -22,3 +22,11 @@ echo "Installing golang..."
 cat <<-'EOF' > '/etc/profile.d/golang.sh'
 	export PATH="$PATH:/usr/local/go/bin"
 EOF
+
+(
+	cd /home
+	mkdir node_modules
+	echo '{}' > package.json
+	echo '{}' > package-lock.json
+	chmod 777 node_modules package.json package-lock.json
+)
