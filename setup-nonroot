@@ -16,6 +16,10 @@ echo "Installing elan..."
 'cache-curl' 'https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh' | sh -s -- -y
 echo
 
+echo "Installing nvm..."
+(export NODE_VERSION='node' && 'cache-curl' 'https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh' | bash > /dev/null)
+echo
+
 echo "Installing python..."
 bash -l <<-'EOF'
 	micromamba env create -y -n 'python' python > /dev/null

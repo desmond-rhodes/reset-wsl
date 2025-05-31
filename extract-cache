@@ -25,3 +25,10 @@ if [ -d '/var/tmp/elan' ]; then
 else
 	echo "Skipped caching elan..."
 fi
+
+if [ -d '/var/tmp/nvm' ]; then
+	echo "Caching nvm..."
+	tar -cf 'cache-nvm.tar' -C '/' 'var/tmp/nvm'
+else
+	echo "Skipped caching nvm..."
+fi

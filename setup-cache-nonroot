@@ -33,3 +33,18 @@ su "${username}" <<-'EOF'
 	mkdir -p "${HOME}/.elan"
 	ln -s '/var/tmp/elan' "${HOME}/.elan/toolchains"
 EOF
+
+if [ -f 'cache-nvm.tar' ]; then
+	echo 'Found: cache-nvm.tar'
+	tar -xf 'cache-nvm.tar' -C '/'
+	chmod 777 '/var/tmp/nvm'
+else
+	echo 'Not found: cache-nvm.tar'
+	mkdir '/var/tmp/nvm'
+	chmod 777 '/var/tmp/nvm'
+fi
+
+su "${username}" <<-'EOF'
+	mkdir -p "${HOME}/.nvm"
+	ln -s '/var/tmp/nvm' "${HOME}/.nvm/.cache"
+EOF
