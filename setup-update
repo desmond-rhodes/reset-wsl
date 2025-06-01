@@ -5,3 +5,15 @@ set -euo pipefail
 './apt--get' update
 './apt-get' -y dist-upgrade
 './apt-get' -y autopurge
+
+echo
+echo 'Upgrade to sid...'
+echo
+
+cat <<-'EOF' > '/etc/apt/sources.list'
+	deb http://deb.debian.org/debian sid main
+EOF
+
+'./apt--get' update
+'./apt-get' -y dist-upgrade
+'./apt-get' -y autopurge
