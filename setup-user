@@ -19,7 +19,7 @@ EOF
 sed -i '/PS1.*\\\$/s/\\\$/\\n\0/' '/etc/skel/.bashrc'
 '/usr/lib/wsl/oobe.sh'
 
-username=$(ls /home)
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
 
 cat <<-EOF > '/etc/wsl.conf'
 	[boot]

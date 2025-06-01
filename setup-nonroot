@@ -13,7 +13,7 @@ EOF
 echo
 
 echo "Installing elan..."
-'cache-curl' 'https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh' | sh -s -- -y
+'cache-curl' 'https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh' | sed "s/curl -[^ ]*/'cache-curl'/" | sh -s -- -y
 echo
 
 echo "Installing nvm..."

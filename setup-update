@@ -7,9 +7,5 @@ apt__get() { set -x && apt-get "${@}" && { set +x; } 2> /dev/null; }
 apt_get() { set -x && apt-get "${@}" > /dev/null && { set +x; } 2> /dev/null; }
 
 apt__get update
-echo
-
 apt_get -y dist-upgrade
-echo
-
 apt_get -y autopurge

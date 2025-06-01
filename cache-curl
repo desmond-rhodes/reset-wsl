@@ -16,6 +16,7 @@ if [ ! -f "${file}" ]; then
 	tmp="${file}.$(random 8)"
 	curl -Lo "${tmp}" "${link}"
 	mv "${tmp}" "${file}"
+	chmod 'a+rw' "${file}"
 else
 	echo "Cached ${link}" >&2
 fi
