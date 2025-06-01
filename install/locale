@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Installing locale..."
+
+'./apt-get' -y install locales
+
+sed -i '/en_US.UTF-8/s/^# //g' '/etc/locale.gen'
+locale-gen
+
+cat <<-'EOF' > '/etc/profile.d/locale.sh'
+	export LANG='en_US.UTF-8'
+	export LANGUAGE='en_US:en'
+	export LC_ALL='en_US.UTF-8'
+EOF

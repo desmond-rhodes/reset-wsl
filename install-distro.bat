@@ -10,6 +10,7 @@ set "cache=%cache% nvm"
 set "cache=%cache% pip"
 
 set "install="
+set "install=%install% locale"
 set "install=%install% curl"
 set "install=%install% neovim"
 set "install=%install% clang"
