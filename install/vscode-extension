@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+
+echo "Installing vscode extension..."
+
+su "${username}" <<-'EOF'
+	install_extension() { code install --install-extension "${1}" | sed "/Installing extensions.../d;s/ Use '--force' .*//"; }
+
+	install_extension 'emeraldwalk.RunOnSave'
+	install_extension 'golang.Go'
+	install_extension 'James-Yu.latex-workshop'
+	install_extension 'leanprover.lean4'
+	install_extension 'ms-azuretools.vscode-containers'
+	install_extension 'ms-python.python'
+	install_extension 'ms-vscode.cpptools-extension-pack'
+	install_extension 'ms-vscode.makefile-tools'
+EOF
