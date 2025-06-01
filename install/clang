@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Installing clang..."
+
+'./apt-get' -y install clang make
