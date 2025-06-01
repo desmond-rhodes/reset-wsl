@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+'./cache-x' 'curl' '/' 'var/tmp/curl' 'a+rwx'
+
+cp 'cache-curl' '/usr/local/bin'

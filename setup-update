@@ -2,10 +2,6 @@
 
 set -euo pipefail
 
-apt__get() { set -x && apt-get "${@}" && { set +x; } 2> /dev/null; }
-
-apt_get() { set -x && apt-get "${@}" > /dev/null && { set +x; } 2> /dev/null; }
-
-apt__get update
-apt_get -y dist-upgrade
-apt_get -y autopurge
+'./apt--get' update
+'./apt-get' -y dist-upgrade
+'./apt-get' -y autopurge

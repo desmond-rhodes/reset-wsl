@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+
+su "${username}" <<-'EOF'
+	set -euo pipefail
+
+	'./cache-x' 'nvm' "${HOME}"
+EOF

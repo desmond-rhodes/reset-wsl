@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Installing neovim..."
+
+'cache-curl' 'https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz' | tar -xzC '/opt'
+
+cat <<-'EOF' > '/etc/profile.d/nvim.sh'
+	export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+EOF

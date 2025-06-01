@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+
+echo "Installing typescript..."
+
+su "${username}" <<-'EOF'
+bash -ic "$(cat <<-'EOT'
+	set -euo pipefail
+
+	npm install --global 'typescript' > /dev/null
+	npm install --prefix "${HOME}" --save-dev '@types/node' > /dev/null
+EOT
+)"
+EOF

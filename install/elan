@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+
+echo "Installing elan..."
+
+su "${username}" <<-'EOF'
+	set -euo pipefail
+
+	'cache-curl' 'https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh' | sed "s/curl -[^ ]*/'cache-curl'/" | sh -s -- -y
+EOF

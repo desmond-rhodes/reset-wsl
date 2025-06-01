@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+
+echo "Installing node..."
+
+su "${username}" <<-'EOF'
+	set -euo pipefail
+
+	export NODE_VERSION='node'
+
+	'cache-curl' 'https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh' | bash > /dev/null
+EOF
+
+su "${username}" <<-'EOF'
+bash -ic "$(cat <<-'EOT'
+	set -euo pipefail
+
+	npm install --global 'npm' > /dev/null
+EOT
+)"
+EOF

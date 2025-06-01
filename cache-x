@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -f "cache/${1}.tar" ]; then
+	echo "Found: cache/${1}.tar"
+	tar -xf "cache/${1}.tar" -C "${2}"
+else
+	echo "Not found: cache/${1}.tar"
+	if [ ! -z "${3-}" ]; then
+		mkdir "${2}/${3}"
+		[ ! -z "${4-}" ] && chmod "${4}" "${2}/${3}"
+	fi
+fi

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Installing gnupg..."
+
+'./apt-get' -y install gnupg
+
+cat <<-'EOF' > '/etc/profile.d/gnupg.sh'
+	gpg_tty() { tty > /dev/null && export GPG_TTY=$(tty); }
+
+	gpg() { gpg_tty; command gpg "$@"; }
+
+	gpg_tty
+EOF

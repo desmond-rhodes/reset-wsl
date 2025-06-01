@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Installing golang..."
+
+'cache-curl' "https://go.dev/dl/$(curl -s 'https://go.dev/VERSION?m=text' | head -n1).linux-amd64.tar.gz" | tar -xzC '/usr/local'
+
+cat <<-'EOF' > '/etc/profile.d/golang.sh'
+	export PATH="$PATH:/usr/local/go/bin"
+EOF

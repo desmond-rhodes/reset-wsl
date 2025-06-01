@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+
+'./cache-c' 'apt' '/' 'var/cache/apt'
+'./cache-c' 'apt-update' '/' 'var/lib/apt'
+'./cache-c' 'curl' '/' 'var/tmp/curl'
+
+su "${username}" <<-'EOF'
+	set -euo pipefail
+
+	'./cache-c' 'lean' "${HOME}" '.elan/toolchains'
+	'./cache-c' 'micromamba' "${HOME}" 'micromamba/pkgs'
+	'./cache-c' 'npm' "${HOME}" '.npm/_cacache'
+	'./cache-c' 'nvm' "${HOME}" '.nvm/.cache'
+EOF

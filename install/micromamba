@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+
+echo "Installing micromamba..."
+
+'./apt-get' -y install bzip2
+
+su "${username}" <<-'EOF'
+	set -euo pipefail
+
+	'cache-curl' 'https://micro.mamba.pm/api/micromamba/linux-64/latest' | tar -jxC "${HOME}" 'bin/micromamba'
+EOF
+
+su -l "${username}" <<-'EOF'
+	set -euo pipefail
+
+	micromamba shell init -s bash -r "${HOME}/micromamba" > /dev/null
+	micromamba config append channels 'conda-forge' > /dev/null
+	micromamba config set channel_priority 'strict' > /dev/null
+EOF

@@ -2,20 +2,6 @@
 
 set -euo pipefail
 
-apt_get() { set -x && apt-get "${@}" > /dev/null && { set +x; } 2> /dev/null; }
-
-apt_get -y install gnupg
-apt_get -y install patch
-echo
-
-cat <<-'EOF' > '/etc/profile.d/gnupg.sh'
-	gpg_tty() { tty > /dev/null && export GPG_TTY=$(tty); }
-
-	gpg() { gpg_tty; command gpg "$@"; }
-
-	gpg_tty
-EOF
-
 sed -i '/PS1.*\\\$/s/\\\$/\\n\0/' '/etc/skel/.bashrc'
 '/usr/lib/wsl/oobe.sh'
 
