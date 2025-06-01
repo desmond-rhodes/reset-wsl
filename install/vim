@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "Installing vim..."
+
+'./apt-get' -y install vim

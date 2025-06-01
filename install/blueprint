@@ -7,7 +7,7 @@ location=$(pwd)
 
 echo "Installing blueprint..."
 
-'./apt-get' -y install build-essential git graphviz libgraphviz-dev
+'./apt-get' -y install build-essential graphviz libgraphviz-dev
 
 su -l "${username}" -c "cd '${location}' && bash" <<-'EOF'
 	set -euo pipefail
