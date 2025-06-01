@@ -16,4 +16,5 @@ su "${username}" <<-'EOF'
 	'./cache-c' 'npm' "${HOME}" '.npm/_cacache'
 	'./cache-c' 'nvm' "${HOME}" '.nvm/.cache'
 	'./cache-c' 'pip' "${HOME}" '.cache/pip'
+	'./cache-c' 'vscode-server' "${HOME}" '.vscode-server'
 EOF

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+
+echo "Installing vscode-server..."
+
+su "${username}" <<-'EOF'
+	code --version > /dev/null
+EOF
