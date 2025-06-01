@@ -11,8 +11,9 @@ username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
 su "${username}" <<-'EOF'
 	set -euo pipefail
 
-	'./cache-c' 'lean' "${HOME}" '.elan/toolchains'
+	'./cache-c' 'elan' "${HOME}" '.elan/toolchains'
 	'./cache-c' 'micromamba' "${HOME}" 'micromamba/pkgs'
 	'./cache-c' 'npm' "${HOME}" '.npm/_cacache'
 	'./cache-c' 'nvm' "${HOME}" '.nvm/.cache'
+	'./cache-c' 'pip' "${HOME}" '.cache/pip'
 EOF

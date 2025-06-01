@@ -3,10 +3,11 @@
 set -euo pipefail
 
 username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+location=$(pwd)
 
 echo "Installing python..."
 
-su -l "${username}" <<-'EOF'
+su -l "${username}" -c "cd '${location}' && bash" <<-'EOF'
 	set -euo pipefail
 
 	micromamba env create -y -n 'python' python > /dev/null

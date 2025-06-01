@@ -3,10 +3,11 @@
 set "cache="
 @REM set "cache=%cache% apt-update"
 set "cache=%cache% curl"
-set "cache=%cache% lean"
+set "cache=%cache% elan"
 set "cache=%cache% micromamba"
 set "cache=%cache% npm"
 set "cache=%cache% nvm"
+set "cache=%cache% pip"
 
 set "install="
 set "install=%install% curl"
@@ -19,6 +20,7 @@ set "install=%install% python"
 set "install=%install% elan"
 set "install=%install% lean"
 set "install=%install% latex"
+set "install=%install% blueprint"
 
 if "%~1"=="" (set "distro=debian") else (set "distro=%~1")
 if "%~2"=="" (set "location=C:\WSL") else (set "location=%~2")

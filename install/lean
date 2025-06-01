@@ -3,13 +3,12 @@
 set -euo pipefail
 
 username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+location=$(pwd)
 
 echo "Installing lean..."
 
-su -l "${username}" <<-'EOF'
+su -l "${username}" -c "cd '${location}' && bash" <<-'EOF'
 	set -euo pipefail
 
-	lean_install() { (set -x; elan toolchain install "${1}" > /dev/null; { set +x; } 2> /dev/null) || printf ''; }
-
-	lean_install `curl -s 'https://api.github.com/repos/leanprover/lean4/tags' | sed '/name/!d;/rc/d;s/.*\(v[^"]*\).*/\1/;q'`
+	'./elan' toolchain install `curl -s 'https://api.github.com/repos/leanprover/lean4/tags' | sed '/name/!d;/rc/d;s/.*\(v[^"]*\).*/\1/;q'`
 EOF

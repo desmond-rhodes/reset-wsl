@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euxo pipefail
+
+{
+	elan "${@}" > /dev/null
+	{ set +x; } 2> /dev/null
+} \
+|| printf ''

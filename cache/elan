@@ -7,5 +7,5 @@ username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
 su "${username}" <<-'EOF'
 	set -euo pipefail
 
-	'./cache-x' 'lean' "${HOME}"
+	'./cache-x' 'elan' "${HOME}"
 EOF

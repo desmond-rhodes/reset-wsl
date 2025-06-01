@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+username=$(cat /etc/passwd | sed '/home/!d;s/:.*//')
+location=$(pwd)
+
+echo "Installing blueprint..."
+
+'./apt-get' -y install build-essential git graphviz libgraphviz-dev
+
+su -l "${username}" -c "cd '${location}' && bash" <<-'EOF'
+	set -euo pipefail
+
+	'./elan' toolchain install `curl -s 'https://api.github.com/repos/leanprover/lean4/tags' | sed '/name/!d;/rc/d;s/.*\(v[^"]*\).*/\1/;q'`
+	'./elan' toolchain install `curl -s 'https://raw.githubusercontent.com/PatrickMassot/checkdecls/refs/heads/master/lean-toolchain' | sed 's/.*://'`
+	'./elan' toolchain install `curl -s 'https://raw.githubusercontent.com/leanprover/doc-gen4/refs/heads/main/lean-toolchain' | sed 's/.*://'`
+
+	micromamba env create -y -n 'blueprint' python > /dev/null
+	micromamba run -n 'blueprint' pip install leanblueprint > /dev/null
+EOF
