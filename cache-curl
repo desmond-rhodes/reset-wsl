@@ -11,6 +11,9 @@ cd '/var/tmp/curl'
 link="${1}"
 file=$(sha256 "${link}")
 
+echo "${link}" > "${file}.source"
+chmod 'a+rw' "${file}.source"
+
 if [ ! -f "${file}" ]; then
 	echo "Downloading ${link}" >&2
 	tmp="${file}.$(random 8)"
