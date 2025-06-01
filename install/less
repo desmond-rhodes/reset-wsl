@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing less..."
 
-'./apt-get' -y install less
+'./apt-get' -y install 'less'

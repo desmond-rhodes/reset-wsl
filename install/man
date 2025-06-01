@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing man..."
 
-'./apt-get' -y install man
+'./apt-get' -y install 'man'

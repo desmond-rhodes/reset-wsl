@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing git..."
 
-'./apt-get' -y install git
+'./apt-get' -y install 'git'

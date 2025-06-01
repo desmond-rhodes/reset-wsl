@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing patch..."
 
-'./apt-get' -y install patch
+'./apt-get' -y install 'patch'

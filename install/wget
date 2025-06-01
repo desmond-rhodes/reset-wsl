@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing wget..."
 
-'./apt-get' -y install wget
+'./apt-get' -y install 'wget'

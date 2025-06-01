@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing clang..."
 
-'./apt-get' -y install clang make
+'./apt-get' -y install 'clang' 'make'

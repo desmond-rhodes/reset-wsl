@@ -4,7 +4,7 @@ set -euo pipefail
 
 echo "Installing locale..."
 
-'./apt-get' -y install locales
+'./apt-get' -y install 'locales'
 
 sed -i '/en_US.UTF-8/s/^# //g' '/etc/locale.gen'
 locale-gen

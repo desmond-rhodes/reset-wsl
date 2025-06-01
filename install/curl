@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing curl..."
 
-'./apt-get' -y install curl
+'./apt-get' -y install 'curl'

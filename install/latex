@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing latex..."
 
-'./apt-get' -y install latexmk texlive-bibtex-extra texlive-xetex
+'./apt-get' -y install 'latexmk' 'texlive-bibtex-extra' 'texlive-xetex'

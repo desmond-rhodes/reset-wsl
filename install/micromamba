@@ -7,7 +7,7 @@ location=$(pwd)
 
 echo "Installing micromamba..."
 
-'./apt-get' -y install bzip2
+'./apt-get' -y install 'bzip2'
 
 su "${username}" <<-'EOF'
 	set -euo pipefail

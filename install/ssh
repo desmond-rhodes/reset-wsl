@@ -4,4 +4,4 @@ set -euo pipefail
 
 echo "Installing ssh..."
 
-'./apt-get' -y install ssh
+'./apt-get' -y install 'ssh'
