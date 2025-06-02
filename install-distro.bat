@@ -66,6 +66,10 @@ call :main & goto :eof
 	wsl --import %distro% "%location%\%distro%" "%image%" || goto :eof
 	echo:
 
+	echo Copy icon...
+	copy /y "shortcut.ico" "%location%\%distro%"
+	echo:
+
 	call :run_root "./setup-user" || goto :eof
 
 	call :run_root "./cache/apt" || goto :eof
